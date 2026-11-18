@@ -1,10 +1,10 @@
 // Nishtek PDF — renderer
-import * as pdfjsLib from './vendor/pdf.min.js';
+import * as pdfjsLib from './pdf.min.js';
 import { hydrateIcons } from './icons.js';
 import * as io from './io.js';
 import { buildPdf, imagesToPdf, blankPdf, rasterizePdf, optimizePdf, canEdit, BASELINE, LINE_H } from './pdfbuild.js';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('./vendor/pdf.worker.min.js', import.meta.url).href;
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('./pdf.worker.min.js', import.meta.url).href;
 // On the web build, binary font/cmap data ships as base64 .txt files (hosts only serve known file types).
 function b64ToBytes(t) { const bin = atob(t.trim()); const out = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
 // cmaps and standard fonts are bundled into one JSON file per folder (keeps the site small to upload)
@@ -29,9 +29,9 @@ class WebFontFactory {
   async fetch({ filename }) { return fetchB64(this.baseUrl + filename); }
 }
 const PDFJS_OPTS = {
-  cMapUrl: new URL('./vendor/cmaps/', import.meta.url).href,
+  cMapUrl: new URL('./cmaps/', import.meta.url).href,
   cMapPacked: true,
-  standardFontDataUrl: new URL('./vendor/standard_fonts/', import.meta.url).href,
+  standardFontDataUrl: new URL('./standard_fonts/', import.meta.url).href,
   isEvalSupported: false,
   ...(io.isDesktop ? {} : { CMapReaderFactory: WebCMapFactory, StandardFontDataFactory: WebFontFactory, useWorkerFetch: false }),
 };

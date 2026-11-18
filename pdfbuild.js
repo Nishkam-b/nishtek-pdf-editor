@@ -14,7 +14,7 @@ async function uniBytes(bold) {
   if (!uniFontBytes) uniFontBytes = {};
   const k = bold ? 'b' : 'r';
   if (!uniFontBytes[k]) {
-    const r = await fetch(bold ? 'fonts/DejaVuSans-Bold.ttf' : 'fonts/DejaVuSans.ttf');
+    const r = await fetch(bold ? 'DejaVuSans-Bold.ttf' : 'DejaVuSans.ttf');
     uniFontBytes[k] = new Uint8Array(await r.arrayBuffer());
   }
   return uniFontBytes[k];
