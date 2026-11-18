@@ -1,10 +1,10 @@
 // Nishtek PDF — renderer
-import * as pdfjsLib from './pdf.min.js';
-import { hydrateIcons } from './icons.js';
-import * as io from './io.js';
-import { buildPdf, imagesToPdf, blankPdf, rasterizePdf, optimizePdf, canEdit, BASELINE, LINE_H } from './pdfbuild.js';
+import * as pdfjsLib from './pdf.min.js?v=3';
+import { hydrateIcons } from './icons.js?v=3';
+import * as io from './io.js?v=3';
+import { buildPdf, imagesToPdf, blankPdf, rasterizePdf, optimizePdf, canEdit, BASELINE, LINE_H } from './pdfbuild.js?v=3';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('./pdf.worker.min.js', import.meta.url).href;
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('./pdf.worker.min.js?v=3', import.meta.url).href;
 // On the web build, binary font/cmap data ships as base64 .txt files (hosts only serve known file types).
 function b64ToBytes(t) { const bin = atob(t.trim()); const out = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
 // cmaps and standard fonts are bundled into one JSON file per folder (keeps the site small to upload)
